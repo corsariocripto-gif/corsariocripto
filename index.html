@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corsario Cripto | Trading, Finanzas y Seguridad</title>
+    <meta name="description" content="Aprende trading e inversiones en criptomonedas 100% gratis con el Corsario Cripto.">
+    
+    <!-- Fuentes de Google: Space Mono para código/hacker, Outfit para lectura -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind para adaptar tus colores -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#050508',
+                        darker: '#020203',
+                        neonGreen: '#39FF14',
+                        gold: '#FFD700',
+                        crimson: '#8B0000',
+                        panel: 'rgba(15, 20, 30, 0.75)'
+                    },
+                    fontFamily: {
+                        mono: ['"Space Mono"', 'monospace'],
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos Personalizados y Animaciones */
+        body {
+            background-color: theme('colors.darker');
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Efecto Glitch para títulos */
+        .glitch-text {
+            position: relative;
+            color: white;
+            text-shadow: 0 0 5px theme('colors.neonGreen');
+        }
+        
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 theme('colors.gold');
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 theme('colors.neonGreen');
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 86px, 0); }
+            20% { clip: rect(48px, 9999px, 12px, 0); }
+            40% { clip: rect(98px, 9999px, 58px, 0); }
+            60% { clip: rect(32px, 9999px, 89px, 0); }
+            80% { clip: rect(77px, 9999px, 15px, 0); }
+            100% { clip: rect(21px, 9999px, 92px, 0); }
+        }
+        
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(12px, 9999px, 54px, 0); }
+            40% { clip: rect(89px, 9999px, 23px, 0); }
+            60% { clip: rect(45px, 9999px, 78px, 0); }
+            80% { clip: rect(2px, 9999px, 34px, 0); }
+            100% { clip: rect(90px, 9999px, 11px, 0); }
+        }
+
+        /* Resplandor Neón */
+        .glow-border {
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glow-border:hover {
+            border-color: theme('colors.neonGreen');
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5), inset 0 0 10px rgba(57, 255, 20, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .glow-border-gold {
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glow-border-gold:hover {
+            border-color: theme('colors.gold');
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transform: translateY(-5px);
+        }
+
+        /* Terminal Style */
+        .terminal-window {
+            background: #0a0a0f;
+            border-radius: 8px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .terminal-header {
+            background: #1a1a24;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        .terminal-dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        /* Cursor parpadeante */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Canvas Background */
+        #matrixCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        /* Velas SVG Animación */
+        .candle-up {
+            fill: theme('colors.neonGreen');
+            transform-origin: bottom;
+            animation: growCandle 2s ease-out forwards;
+        }
+        .candle-down {
+            fill: theme('colors.crimson');
+            transform-origin: top;
+            animation: growCandleDown 2s ease-out forwards;
+        }
+        @keyframes growCandle {
+            0% { transform: scaleY(0); opacity: 0; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+        @keyframes growCandleDown {
+            0% { transform: scaleY(0); opacity: 0; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+        
+        /* Efecto de ruido de fondo */
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-neonGreen selection:text-black relative">
+    
+    <div class="bg-noise"></div>
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-40 bg-dark/90 backdrop-blur-md border-b border-neonGreen/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-4">
+                    <!-- Logo Imagen -->
+                    <div class="relative w-12 h-12 rounded-full border-2 border-gold overflow-hidden glow-border-gold">
+                        <!-- Asegúrate de que el nombre del archivo coincida exactamente -->
+                        <img src="Logo de Corsario crypto 3D.jpg" alt="Logo Corsario" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'none\' stroke=\'%23FFD700\' stroke-width=\'5\'><circle cx=\'50\' cy=\'50\' r=\'40\'/><path d=\'M30 60 Q50 80 70 60\'/><circle cx=\'35\' cy=\'40\' r=\'5\' fill=\'%2339FF14\'/><circle cx=\'65\' cy=\'40\' r=\'5\' fill=\'%2339FF14\'/></svg>'">
+                    </div>
+                    <span class="font-mono font-bold text-xl text-white tracking-widest hidden sm:block">
+                        CORSARIO<span class="text-neonGreen">_CRIPTO</span>
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 font-mono text-sm">
+                        <a href="#manifiesto" class="text-gray-300 hover:text-neonGreen transition-colors duration-300">[ Manifiesto ]</a>
+                        <a href="#reglas" class="text-gray-300 hover:text-neonGreen transition-colors duration-300">[ El_Código ]</a>
+                        <a href="#seguridad" class="text-gray-300 hover:text-gold transition-colors duration-300">[ Ciberseguridad ]</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://x.com/Corsario_Cripto" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"></path></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@CorsarioCripto" target="_blank" class="px-5 py-2 border border-neonGreen text-neonGreen font-mono text-sm hover:bg-neonGreen hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(57,255,20,0.2)] hover:shadow-[0_0_20px_rgba(57,255,20,0.6)] rounded">
+                        > UNIRSE_AL_CANAL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <canvas id="matrixCanvas"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/80 to-darker z-0"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="mb-8 relative inline-block">
+                <img src="Logo de Corsario crypto 3D.jpg" alt="Corsario Cripto" class="w-48 h-48 sm:w-64 sm:h-64 rounded-full border-4 border-dark shadow-[0_0_40px_rgba(57,255,20,0.4)] mx-auto relative z-10 object-cover" onerror="this.style.display='none'">
+                <!-- Anillo decorativo -->
+                <div class="absolute inset-0 rounded-full border border-gold animate-ping opacity-20"></div>
+            </div>
+            
+            <h1 class="text-5xl sm:text-7xl font-bold font-mono uppercase tracking-tighter mb-4">
+                <span class="glitch-text" data-text="CORSARIO CRIPTO">CORSARIO CRIPTO</span>
+            </h1>
+            
+            <div class="h-16 sm:h-12 mt-6">
+                <p class="text-xl sm:text-2xl text-gray-400 font-mono">
+                    > <span id="typewriter"></span><span class="cursor-blink text-neonGreen">_</span>
+                </p>
+            </div>
+
+            <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#reglas" class="px-8 py-3 bg-neonGreen text-black font-bold font-mono tracking-wide hover:bg-white transition-colors shadow-[0_0_15px_rgba(57,255,20,0.5)]">
+                    INICIAR_SISTEMA
+                </a>
+                <a href="https://www.youtube.com/@CorsarioCripto" target="_blank" class="px-8 py-3 border border-gold text-gold font-bold font-mono tracking-wide hover:bg-gold hover:text-black transition-all shadow-[0_0_10px_rgba(255,215,0,0.2)]">
+                    VER TRANSMISIÓN
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifiesto Section -->
+    <section id="manifiesto" class="py-24 bg-dark relative border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-mono text-gold mb-2">>_ WHOAMI</h2>
+                    <h3 class="text-4xl font-bold mb-6">El Manifiesto del Corsario</h3>
+                    <div class="space-y-4 text-gray-400 text-lg leading-relaxed">
+                        <p>No te quiero vender un curso, no te quiero prometer riquezas de la noche a la mañana y mucho menos te quiero cobrar ni un peso por esto.</p>
+                        <p>Soy un pirata futurista navegando los mares de la blockchain. Al principio, cometí todos los errores posibles: perdí dinero que no tenía, me dejé llevar por el <span class="text-neonGreen">hype</span>, compré en la cima y vendí en el piso llorando.</p>
+                        <p>Mi objetivo es hackear el sistema de la desinformación. Romper las mentiras de los falsos gurús y enseñarte las reglas que me mantienen vivo en el mercado, <strong class="text-white">100% gratis</strong>.</p>
+                    </div>
+                </div>
+                
+                <!-- Animación de Velas Japonesas SVG -->
+                <div class="bg-panel p-6 rounded-xl border border-gray-800 shadow-2xl">
+                    <div class="flex justify-between items-center mb-4 border-b border-gray-700 pb-2">
+                        <span class="font-mono text-neonGreen text-sm">BTC/USDT - Análisis de Red</span>
+                        <span class="flex gap-2"><span class="w-3 h-3 rounded-full bg-red-500"></span><span class="w-3 h-3 rounded-full bg-yellow-500"></span><span class="w-3 h-3 rounded-full bg-green-500"></span></span>
+                    </div>
+                    <svg viewBox="0 0 500 300" class="w-full h-full drop-shadow-[0_0_8px_rgba(57,255,20,0.3)]">
+                        <!-- Grid -->
+                        <line x1="0" y1="50" x2="500" y2="50" stroke="#333" stroke-dasharray="4"/>
+                        <line x1="0" y1="150" x2="500" y2="150" stroke="#333" stroke-dasharray="4"/>
+                        <line x1="0" y1="250" x2="500" y2="250" stroke="#333" stroke-dasharray="4"/>
+                        
+                        <!-- Velas (Wicks and Bodies) -->
+                        <g style="animation-delay: 0.2s">
+                            <line x1="50" y1="180" x2="50" y2="240" stroke="#8B0000" stroke-width="2"/>
+                            <rect x="40" y="190" width="20" height="40" class="candle-down"/>
+                        </g>
+                        <g style="animation-delay: 0.4s">
+                            <line x1="110" y1="160" x2="110" y2="210" stroke="#8B0000" stroke-width="2"/>
+                            <rect x="100" y="170" width="20" height="30" class="candle-down"/>
+                        </g>
+                        <!-- Sangre en las calles -> Reversión -->
+                        <g style="animation-delay: 0.6s">
+                            <line x1="170" y1="140" x2="170" y2="220" stroke="#39FF14" stroke-width="2"/>
+                            <rect x="160" y="180" width="20" height="30" class="candle-up" style="transform-origin: 160px 210px;"/>
+                        </g>
+                        <g style="animation-delay: 0.8s">
+                            <line x1="230" y1="80" x2="230" y2="190" stroke="#39FF14" stroke-width="2"/>
+                            <rect x="220" y="100" width="20" height="80" class="candle-up" style="transform-origin: 220px 180px;"/>
+                        </g>
+                        <g style="animation-delay: 1.0s">
+                            <line x1="290" y1="60" x2="290" y2="140" stroke="#39FF14" stroke-width="2"/>
+                            <rect x="280" y="70" width="20" height="50" class="candle-up" style="transform-origin: 280px 120px;"/>
+                        </g>
+                        <g style="animation-delay: 1.2s">
+                            <line x1="350" y1="40" x2="350" y2="90" stroke="#39FF14" stroke-width="2"/>
+                            <rect x="340" y="45" width="20" height="35" class="candle-up" style="transform-origin: 340px 80px;"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reglas Section -->
+    <section id="reglas" class="py-24 bg-darker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-mono text-neonGreen tracking-widest uppercase mb-2">Protocolos de Operación</h2>
+                <h3 class="text-4xl md:text-5xl font-bold font-mono uppercase text-white">Las 7 Reglas de <span class="text-gold">Oro</span></h3>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Estas son mi brújula en medio de la tormenta. Reglas inviolables para hacer trading de Spot y Futuros sin perder la cabeza (ni la cartera).</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Regla 1 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">1</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Dinero de Juego
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Nunca inviertas dinero que no estés dispuesto a perder. Si desaparece mañana, no debe arruinarte la vida. Opera sin miedo operando con cabeza.</p>
+                </div>
+
+                <!-- Regla 2 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">2</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                        Compra Miedo, Vende Euforia
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">El FOMO es el mayor ladrón de ganancias. Cuando la sangre corre en las calles, hasta los taxis están a la venta. Compra cuando todo está en rojo.</p>
+                </div>
+
+                <!-- Regla 3 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">3</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        Cero Enamoramientos
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">No te obsesiones con ningún proyecto ni sus promesas futuras. Usa Bitcoin o Ethereum como base; los memes y nuevos proyectos son lotería.</p>
+                </div>
+
+                <!-- Regla 4 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">4</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                        Escalona tus Compras
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Nunca inviertas el 100% de golpe. Divide tu capital y pon órdenes en distintos "suelos" (DCA). Compra en los dips de forma inteligente.</p>
+                </div>
+
+                <!-- Regla 5 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">5</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        La Paciencia es Dinero
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">No vendas al ver un +20%. En Spot, mantengo hasta que los fundamentales mueren. Si hay un pico brutal, saca ganancia parcial y deja correr el resto.</p>
+                </div>
+
+                <!-- Regla 6 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">6</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Apaga las Emociones
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Ni el miedo ni la codicia te pueden dominar. Si te sobrepasan, apaga el celular 24 horas y sal a caminar. Opera como una máquina.</p>
+                </div>
+
+                <!-- Regla 7 -->
+                <div class="bg-panel p-8 rounded-lg glow-border group relative overflow-hidden md:col-span-2 lg:col-span-3 lg:w-1/2 lg:mx-auto">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="text-8xl font-black font-mono text-neonGreen">7</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white group-hover:text-neonGreen transition-colors flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Investigación Profunda (DYOR)
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Demora de 3 a 7 días investigando. Conoce a los devs, el tokenomics y evalúa el riesgo de rug pull. La investigación no es opcional, es tu seguro de vida criptográfico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Seguridad y Privacidad -->
+    <section id="seguridad" class="py-24 bg-dark relative border-t border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-mono text-neonGreen glitch-text" data-text="CIBERSEGURIDAD CRIPTO">CIBERSEGURIDAD CRIPTO</h2>
+                <p class="mt-4 text-gray-400">En el mar de la blockchain, tú eres tu propio banco y tu propia guardia de seguridad.</p>
+            </div>
+
+            <div class="terminal-window mt-8 font-mono text-sm sm:text-base">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot-red"></span>
+                        <span class="dot-yellow"></span>
+                        <span class="dot-green"></span>
+                    </div>
+                    <div class="text-gray-400 text-xs ml-4">root@corsario-cripto:~# ./security_protocols.sh</div>
+                </div>
+                <div class="p-6 text-gray-300 h-80 overflow-y-auto" id="terminal-content">
+                    <p class="text-neonGreen mb-4">Iniciando escaneo de seguridad...</p>
+                    
+                    <div class="mb-4">
+                        <strong class="text-gold">[POLÍTICA 1] NOT YOUR KEYS, NOT YOUR COINS:</strong><br>
+                        Nunca dejes el grueso de tu portafolio en un exchange centralizado (CEX). Si el exchange quiebra (estilo FTX), tus fondos desaparecen. Usa billeteras frías (Hardware Wallets) como Ledger o Trezor.
+                    </div>
+
+                    <div class="mb-4">
+                        <strong class="text-gold">[POLÍTICA 2] CUIDADO CON EL PHISHING:</strong><br>
+                        Los piratas de poca monta intentarán robar tus frases semilla mediante webs falsas o airdrops mágicos en Twitter/Discord. Nunca ingreses tus 12 o 24 palabras en un sitio web. NUNCA.
+                    </div>
+
+                    <div class="mb-4">
+                        <strong class="text-gold">[POLÍTICA 3] HIGIENE DIGITAL:</strong><br>
+                        Usa Autenticación de Dos Factores (2FA) con aplicaciones como Google Authenticator. Evita usar tu número de teléfono (SMS) para 2FA debido al riesgo de SIM Swapping.
+                    </div>
+
+                    <div class="mb-4">
+                        <strong class="text-gold">[POLÍTICA 4] CONTRATOS INTELIGENTES:</strong><br>
+                        Antes de conectar tu billetera de Metamask a una DApp, verifica los permisos que otorgas. Revoca permisos de contratos antiguos regularmente usando herramientas como Revoke.cash.
+                    </div>
+                    
+                    <p class="text-neonGreen mt-4">>> Ejecución terminada. Mantén tu escudo arriba, Corsario.<span class="cursor-blink">_</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#020203] border-t border-gray-800 py-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
+            
+            <img src="Logo de Corsario crypto 3D.jpg" alt="Logo Corsario" class="w-16 h-16 rounded-full border border-gray-700 mb-6 object-cover grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500" onerror="this.style.display='none'">
+            
+            <p class="text-gray-500 font-mono text-sm mb-4">
+                "Que el mercado siempre esté a tu favor, corsario. ¡Arrr!"
+            </p>
+            
+            <div class="flex space-x-6 mb-8">
+                <a href="https://x.com/Corsario_Cripto" target="_blank" class="text-gray-500 hover:text-neonGreen transition-colors">
+                    <span class="sr-only">Twitter</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@CorsarioCripto" target="_blank" class="text-gray-500 hover:text-red-500 transition-colors">
+                    <span class="sr-only">YouTube</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+            
+            <div class="text-center text-xs text-gray-600 font-mono space-y-2">
+                <p>DISCLAIMER: Ninguna información en este sitio web constituye asesoría financiera. El trading de criptomonedas conlleva un alto riesgo.</p>
+                <p>&copy; 2026 Corsario Cripto. Todos los derechos reservados. Operando en la blockchain.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts para Animaciones -->
+    <script>
+        // Efecto Typewriter (Máquina de escribir)
+        const texts = [
+            "Navegando las oscuras aguas de la blockchain.",
+            "Hackeando la desinformación financiera.",
+            "No te vendo cursos, te enseño a sobrevivir.",
+            "Cuando la sangre corre, el corsario compra."
+        ];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        const speed = 100;
+        const pauseTime = 2000;
+
+        function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+            
+            document.getElementById('typewriter').textContent = letter;
+            
+            if (letter.length === currentText.length) {
+                setTimeout(() => {
+                    index = 0;
+                    count++;
+                    type();
+                }, pauseTime);
+            } else {
+                setTimeout(type, speed);
+            }
+        }
+        
+        // Iniciar máquina de escribir
+        setTimeout(type, 1000);
+
+        // Efecto Matrix Lluvia Digital en el Canvas
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const cryptoSymbols = '₿Ξ◎'; // Bitcoin, Ethereum, Solana
+        
+        const alphabet = katakana + latin + nums + cryptoSymbols;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            // Fondo semi-transparente para el efecto de desvanecimiento
+            ctx.fillStyle = 'rgba(2, 2, 3, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Color del texto (Verde Hacker oscuro para que no estorbe la lectura)
+            ctx.fillStyle = '#0F5132';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                
+                // Color dorado aleatorio para algunos caracteres
+                if(Math.random() > 0.98) {
+                    ctx.fillStyle = '#FFD700'; 
+                } else if (Math.random() > 0.95) {
+                    ctx.fillStyle = '#39FF14'; // Verde brillante a veces
+                } else {
+                    ctx.fillStyle = '#0F5132'; // Verde oscuro normal
+                }
+
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        // Renderizar matrix
+        setInterval(draw, 30);
+
+        // Redimensionar canvas si cambia la pantalla
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
