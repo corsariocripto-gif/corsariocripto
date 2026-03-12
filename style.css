@@ -1,12 +1,14 @@
-/* ================= VARIABLES Y RESET ================= */
+/* ======================================================= */
+/* 1. VARIABLES GLOBALES Y COLORES PRINCIPALES             */
+/* ======================================================= */
 :root {
-    --bg-dark: #050505;
-    --bg-purple: #1a0033;
-    --accent-purple: #8a2be2;
-    --accent-green: #00ff66;
-    --accent-red: #ff0044;
-    --accent-gold: #ffb700;
-    --text-main: #e0e0e0;
+    --bg-dark: #060a0f; /* Azul profundo del océano nocturno */
+    --accent-gold: #FFD700; /* Oro pirata puro */
+    --accent-gold-dark: #b8860b;
+    --accent-red: #D90429; /* Rojo corsario */
+    --accent-teal: #00F5D4; /* Color agua marina */
+    --text-main: #e0e6ed;
+    --card-bg: rgba(10, 16, 25, 0.8);
     --font-hacker: 'Orbitron', sans-serif;
     --font-text: 'Rajdhani', sans-serif;
 }
@@ -23,73 +25,131 @@ body {
     color: var(--text-main);
     font-family: var(--font-text);
     overflow-x: hidden;
-    /* Degradado de fondo base */
-    background: radial-gradient(circle at top right, #2a0845, #050505 60%, #050505);
+    background: radial-gradient(circle at top right, #000000, var(--bg-dark) 70%, #000000);
 }
 
-/* ================= CANVAS DE VELAS JAPONESAS ================= */
+/* ======================================================= */
+/* 2. CLASES PARA RESALTAR TEXTOS                          */
+/* ======================================================= */
+.tapi-highlight {
+    color: var(--accent-gold);
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+.restored-text {
+    background: rgba(255, 215, 0, 0.05);
+    border-left: 4px solid var(--accent-gold);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+/* ======================================================= */
+/* 3. EFECTOS DE FONDO (CANVAS Y MONEDAS)                  */
+/* ======================================================= */
 #chartCanvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
-    opacity: 0.25; 
+    z-index: -2;
+    opacity: 0.15; 
     pointer-events: none;
 }
 
-/* ================= NAVBAR ================= */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background-image: url('IMG/logo.webp'); /* Usa tu nueva moneda de oro */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+    animation: zigzagFloat linear infinite;
+    bottom: -60px;
+}
+
+@keyframes zigzagFloat {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.9; }
+    50% { transform: translateY(-50vh) translateX(40px) rotate(180deg); opacity: 0.7; }
+    90% { opacity: 0.9; }
+    100% { transform: translateY(-110vh) translateX(-40px) rotate(360deg); opacity: 0; }
+}
+
+/* ======================================================= */
+/* 4. BARRA DE NAVEGACIÓN (MENÚ ARRIBA)                    */
+/* ======================================================= */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 20px 50px;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5, 5, 5, 0.7);
+    background: rgba(6, 10, 15, 0.85);
     backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
     z-index: 100;
 }
 
 nav .logo-text {
     font-family: var(--font-hacker);
-    font-size: 1.5rem;
-    color: var(--accent-gold);
-    text-shadow: 0 0 10px rgba(255, 183, 0, 0.5);
+    font-size: 1.8rem;
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
 nav .logo-text img {
-    width: 40px;
+    width: 45px;
     border-radius: 50%;
-    border: 2px solid var(--accent-green);
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 10px var(--accent-gold);
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 25px;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
+    text-transform: uppercase;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
 nav ul li a:hover {
-    color: var(--accent-green);
-    text-shadow: 0 0 15px var(--accent-green);
+    color: var(--accent-gold);
+    text-shadow: 0 0 10px var(--accent-gold);
 }
 
-/* ================= HERO SECTION ================= */
+/* ======================================================= */
+/* 5. INICIO (HEADER / HERO SECTION)                       */
+/* ======================================================= */
 header {
     min-height: 100vh;
     display: flex;
@@ -97,188 +157,421 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 100px 20px 20px;
+    padding: 140px 20px 40px;
 }
 
 .hero-img {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 0 40px rgba(138, 43, 226, 0.6), 0 0 80px rgba(0, 255, 102, 0.2);
-    border: 4px solid var(--accent-purple);
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+    border: 4px solid var(--accent-gold);
     animation: float 4s ease-in-out infinite;
     margin-bottom: 30px;
 }
 
 @keyframes float {
     0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(2deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
     100% { transform: translateY(0px) rotate(0deg); }
 }
 
 h1 {
     font-family: var(--font-hacker);
-    font-size: 4rem;
-    background: linear-gradient(90deg, var(--accent-purple), var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 3.5rem;
+    color: #fff;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    max-width: 800px;
+    font-size: 1.3rem;
+    max-width: 900px;
     margin-bottom: 40px;
-    line-height: 1.6;
+    line-height: 1.7;
+    color: #cbd5e1;
 }
 
 .btn {
-    padding: 15px 40px;
-    font-size: 1.2rem;
+    padding: 15px 50px;
+    font-size: 1.3rem;
     font-family: var(--font-hacker);
     color: #000;
-    background: var(--accent-green);
-    border: none;
-    border-radius: 5px;
+    background: linear-gradient(45deg, var(--accent-gold-dark), var(--accent-gold));
+    border: 2px solid #fff;
+    border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 900;
-    box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
     transition: all 0.3s;
 }
 
 .btn:hover {
     transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 0 40px rgba(0, 255, 102, 0.8);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
     background: #fff;
+    color: #000;
+    border-color: var(--accent-gold);
 }
 
-/* ================= SECCIONES GENERALES (EFECTO 3D) ================= */
+/* ======================================================= */
+/* 6. DISEÑO DE LAS TARJETAS 3D Y SECCIONES NORMALES       */
+/* ======================================================= */
 section {
-    padding: 100px 10%;
+    padding: 80px 8%;
     position: relative;
 }
 
 .section-title {
     font-family: var(--font-hacker);
-    font-size: 3rem;
+    font-size: 2.8rem;
     text-align: center;
-    margin-bottom: 60px;
-    color: var(--accent-gold);
-    text-shadow: 0 5px 15px rgba(255, 183, 0, 0.3);
+    margin-bottom: 40px;
+    color: #fff;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .grid-3d {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    gap: 30px;
     perspective: 1000px;
 }
 
 .card {
-    background: rgba(20, 0, 40, 0.6);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(138, 43, 226, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 15px;
-    padding: 40px 30px;
+    padding: 35px 25px;
     text-align: center;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     transform-style: preserve-3d;
 }
 
+.full-width {
+    grid-column: 1 / -1;
+}
+
 .card:hover {
-    transform: translateY(-15px) rotateX(10deg) rotateY(-5deg);
-    box-shadow: 20px 20px 50px rgba(138, 43, 226, 0.4), -10px -10px 30px rgba(0, 255, 102, 0.1);
-    border-color: var(--accent-green);
+    transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 10px 10px 30px rgba(255, 215, 0, 0.2), -10px -10px 30px rgba(0, 245, 212, 0.1);
+    border-color: var(--accent-gold);
 }
 
 .card h3 {
     font-family: var(--font-hacker);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 20px;
-    color: var(--accent-purple);
-}
-
-.card:hover h3 {
-    color: var(--accent-green);
-    text-shadow: 0 0 10px var(--accent-green);
+    color: var(--accent-gold);
 }
 
 .card p {
     font-size: 1.2rem;
     line-height: 1.6;
-}
-
-/* ================= PRIVACIDAD ================= */
-.privacy-box {
-    background: rgba(10, 10, 15, 0.8);
-    border-left: 5px solid var(--accent-gold);
-    padding: 40px;
-    border-radius: 0 15px 15px 0;
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #aaa;
-}
-
-.privacy-box h4 {
-    color: #fff;
-    margin-top: 20px;
     margin-bottom: 10px;
-    font-family: var(--font-hacker);
 }
 
-/* ================= FOOTER Y REDES SOCIALES ================= */
+/* ======================================================= */
+/* 7. NUEVO: CSS DEL MAPA DE NAVEGACIÓN (ROADMAP)          */
+/* ======================================================= */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* La línea vertical del centro */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: rgba(255, 215, 0, 0.3);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 10px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    opacity: 0; /* Para la animación de scroll */
+}
+
+/* Bolitas / Iconos del centro */
+.timeline-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: -25px;
+    background-color: var(--bg-dark);
+    border: 4px solid var(--accent-gold);
+    top: 25px;
+    border-radius: 50%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.left { left: 0; }
+.right { left: 50%; }
+
+.right .timeline-icon {
+    left: -25px;
+}
+
+/* Badges de Estado (Completado / Pendiente) */
+.status-badge {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.completado {
+    background: rgba(0, 255, 102, 0.1);
+    color: #00ff66;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+}
+
+.pendiente {
+    background: rgba(255, 255, 255, 0.05);
+    color: #888;
+    border: 1px solid #555;
+}
+
+/* Estilo especial para el paso completado */
+.timeline-item.done .card {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* ======================================================= */
+/* 8. SECCIÓN DE CONTRATO Y GRÁFICAS                       */
+/* ======================================================= */
+.contract { text-align: center; padding: 6rem 2rem; }
+.contract-details {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2.5rem;
+    max-width: 850px;
+    margin: 0 auto;
+    border: 2px solid var(--accent-gold-dark);
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(255, 215, 0, 0.3);
+    font-size: 1.2rem;
+}
+.copy-button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 1.2rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--accent-gold);
+    border-radius: 8px;
+    color: var(--accent-gold);
+    font-family: var(--font-hacker);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.copy-button:hover { background: var(--accent-gold); color: #000; }
+.copy-notification { display: none; color: var(--accent-teal); margin-top: 15px; font-weight: bold; }
+
+.distribution-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.distribution-item {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.2rem 1.8rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    font-size: 1.1rem;
+}
+
+/* ======================================================= */
+/* 9. PIE DE PÁGINA Y REDES SOCIALES                       */
+/* ======================================================= */
 footer {
     text-align: center;
     padding: 60px 20px 40px;
-    background: #000;
-    border-top: 1px solid var(--accent-purple);
-    font-size: 1.2rem;
+    background: #020407;
+    border-top: 2px solid var(--accent-gold-dark);
 }
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 30px;
-}
-
+.social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
 .social-links a {
+    display: flex; justify-content: center; align-items: center;
+    width: 65px; height: 65px; background: var(--card-bg);
+    border: 2px solid var(--accent-gold); border-radius: 50%; color: var(--accent-gold);
+}
+.social-links a svg { width: 30px; height: 30px; fill: currentColor; }
+
+/* ======================================================= */
+/* 10. DISEÑO PARA TELÉFONOS (RESPONSIVE MÓVIL)            */
+/* ======================================================= */
+@media (max-width: 900px) {
+    h1 { font-size: 2.2rem; }
+    nav { padding: 15px; flex-direction: column; gap: 10px; }
+    nav ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; }
+    header { padding: 180px 20px 40px; }
+    .hero-img { width: 200px; height: 200px; }
+    
+    /* Arreglo del Roadmap para Móviles */
+    .timeline::after { left: 31px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+    .left, .right { left: 0; }
+    .timeline-icon, .right .timeline-icon { left: 5px; top: 30px; }
+    
+    .grid-3d { grid-template-columns: 1fr; }
+    .info-row { flex-direction: column; text-align: left; gap: 5px; }
+}
+
+
+/* ======================================================= */
+/* ESTILOS PARA LA TRIPULACIÓN (PIRÁMIDE DE CARTAS)        */
+/* ======================================================= */
+.pyramid-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 30px; /* Un poco más de separación entre niveles */
+    width: 100%;
+    margin-top: 30px;
+}
+
+.pyramid-level {
+    display: flex;
     justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: rgba(20, 0, 40, 0.6);
-    border: 2px solid var(--accent-purple);
-    border-radius: 50%;
-    color: var(--text-main);
-    transition: all 0.4s ease;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
 }
 
-.social-links a svg {
-    width: 28px;
-    height: 28px;
-    fill: currentColor;
-    transition: fill 0.3s ease;
+/* Tarjeta Base del Tripulante */
+.crew-card {
+    background: var(--card-bg);
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-.social-links a:hover {
-    transform: translateY(-8px) scale(1.1);
-    box-shadow: 0 10px 25px rgba(0, 255, 102, 0.5);
-    border-color: var(--accent-green);
-    color: var(--accent-green); /* Cambia el color del icono */
+.crew-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+    border-color: var(--accent-gold);
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    nav { padding: 15px; flex-direction: column; gap: 15px; }
-    nav ul { flex-wrap: wrap; justify-content: center; }
+/* Contenedor de la Imagen (CORREGIDO: Ahora es más ancho y menos alto) */
+.crew-img-container {
+    width: 100%;
+    aspect-ratio: 4 / 5; /* Cambiamos de 9/16 a 4/5 para un retrato perfecto */
+    background-color: #111;
+    position: relative;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.crew-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center; /* Asegura que no se corte la cabeza */
+}
+
+/* Textos dentro de la tarjeta */
+.crew-info {
+    padding: 20px 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.crew-role {
+    font-family: var(--font-hacker);
+    color: var(--accent-teal);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.crew-name {
+    color: #fff;
+    font-size: 1.6rem; /* Letra un poquito más grande */
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.crew-alias {
+    color: #cbd5e1;
+    font-size: 1.15rem;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.crew-alias span {
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+.crew-flag {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #aaa;
+}
+
+/* TAMAÑOS EN PIRÁMIDE (CORREGIDO: Tarjetas mucho más anchas) */
+.level-1 .crew-card { width: 360px; } /* Antes 300px */
+.level-2 .crew-card { width: 330px; } /* Antes 270px */
+.level-3 .crew-card { width: 300px; } /* Antes 240px */
+
+
+/* ======================================================= */
+/* RESPONSIVO DE LA TRIPULACIÓN (PARA MÓVILES)             */
+/* ======================================================= */
+@media (max-width: 900px) {
+    /* En celulares, usamos el ancho disponible para que no se aprieten */
+    .level-1 .crew-card, 
+    .level-2 .crew-card, 
+    .level-3 .crew-card { 
+        width: 100%; 
+        max-width: 350px; 
+    }
 }
