@@ -3,119 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corsario Cripto | Aprende Trading y Bots GRATIS</title>
+    <meta name="description" content="Info Sobre el proyecto ₮API - La tripulación cripto">
+    <meta property="og:image" content="IMG/logo.webp">
+    <meta property="og:description" content="Descubre cómo sería el proyecto ₮API, la web de tareas y recompensas del Futuro">
+    <meta property="og:title" content="TOKEN ₮API">
+
+    <title>Corsario Cripto | TOKEN ₮API</title>
+    <link rel="shortcut icon" href="IMG/logo.webp" type="image/x-icon">
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Enlace al archivo CSS externo -->
+    <!-- CSS Externo -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Animación de Velas en el fondo -->
+    <!-- ======================================================= -->
+    <!-- EFECTOS DE FONDO (VELAS Y MONEDAS)                      -->
+    <!-- ======================================================= -->
     <canvas id="chartCanvas"></canvas>
+    <div id="particles"></div>
 
-    <!-- Barra de Navegación -->
+    <!-- ======================================================= -->
+    <!-- MENÚ DE NAVEGACIÓN SUPERIOR                             -->
+    <!-- ======================================================= -->
     <nav>
         <div class="logo-text">
-            <img src="./IMG/logo.png" alt="Logo Corsario">
-            CORSARIO CRIPTO
+            <img src="IMG/logo.webp" alt="Moneda TAPI">
+            <span class="tapi-highlight">₮API</span>
         </div>
         <ul>
-            <li><a href="#inicio">La Base</a></li>
-            <li><a href="#sobre-mi">El Capitán</a></li>
-            <li><a href="#entrenamiento">Arsenal</a></li>
-            <li><a href="#privacidad">Privacidad</a></li>
+            <li><a href="#inicio">Zarpar</a></li>
+            <li><a href="#sobre-tapi">El Botín</a></li>
+            <li><a href="#mapa-navegacion">El Mapa</a></li>
+            <li><a href="#tripulacion">Oficiales</a></li> <!-- NUEVO ENLACE AL EQUIPO -->
+            <li><a href="#futuro">Horizontes</a></li>
+            <li><a href="#contrato">Contrato</a></li>
         </ul>
     </nav>
 
-    <!-- Sección Inicio / Hero -->
+    <!-- ======================================================= -->
+    <!-- 1. SECCIÓN PRINCIPAL: INICIO (HERO)                     -->
+    <!-- ======================================================= -->
     <header id="inicio">
-        <img src="./IMG/logo.png" alt="Corsario Cripto" class="hero-img">
-        <h1>Hackea el Sistema,<br>Protege tu Tesoro</h1>
+        <img src="IMG/logo.webp" alt="Corsario Cripto" class="hero-img">
+        <h1>TOKEN <span class="tapi-highlight">₮API</span> <br>La Evolución de las <br>Misiones Pagadas ONLINE</h1>
         <p class="hero-subtitle">
-            Aprende a operar con <strong>Bots de Trading</strong> e inversión inteligente. 
-            Te enseñaré GRATIS a dominar el mercado Spot con capital real sin arriesgar tu vida en futuros. 
-            Deja de cometer los errores del novato y únete a la tripulación.
+            Soy Corsario Cripto, un trader con años navegando en las turbulentas aguas de las criptomonedas. Fui testigo de cómo las grandes ballenas y los bots hundían los precios, saqueando a los pequeños inversores. Vi cómo los proyectos sin rumbo se hundían en horas. Analizando los errores de otros, decidí construir mi propio galeón. Un token seguro y con utilidad real. Así nació <span class="tapi-highlight">₮API</span>, un proyecto planeado por más de cinco años para construir una economía descentralizada donde la tripulación (la comunidad) sea la verdadera beneficiada.
         </p>
-        <a href="#entrenamiento" class="btn">Comenzar Entrenamiento</a>
+        <a href="#sobre-tapi" class="btn">Desplegar Velas</a>
     </header>
 
-    <!-- Sección Sobre Mí -->
-    <section id="sobre-mi">
-        <h2 class="section-title">8 Años Navegando Cripto</h2>
-        <div class="grid-3d" style="max-width: 1000px; margin: 0 auto; grid-template-columns: 1fr;">
-            <div class="card">
-                <h3>El Conocimiento No Se Cobra</h3>
-                <p>
-                    Comencé hace 8 años y cometí todos los errores que la industria quiere que cometas. Perdí dinero, usé exceso de apalancamiento en futuros y fui víctima del mercado. Hoy mi misión es enseñarte a operar como un verdadero <strong>hacker del mercado</strong>. No te cobraré cursos ni membresías. Mi pago es crear una tripulación invencible que sepa gestionar su capital y poner a trabajar a los robots a nuestro favor.
-                </p>
+    <!-- ======================================================= -->
+    <!-- 2. SECCIÓN: CÓMO FUNCIONA TAPI (SOBRE TAPI)             -->
+    <!-- ======================================================= -->
+    <section id="sobre-tapi">
+        <h2 class="section-title">El Funcionamiento de <span class="tapi-highlight">₮API</span></h2>
+        <div class="grid-3d" style="max-width: 1100px; margin: 40px auto; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            
+            <div class="card full-width">
+                <h3>⚓ Una Taberna Donde Ganas Tokens por Misiones</h3>
+                <p>La plataforma permitirá a la tripulación ganar tokens completando misiones encomendadas como:</p>
+                <div class="misiones-list">
+                    <p>✅ Seguir cuentas en redes sociales</p>
+                    <p>✅ Ver videos y dejar comentarios de valor</p>
+                    <p>✅ Visitar y explorar sitios web</p>
+                    <p>✅ Y muchas tareas más...</p>
+                </div>
+                <div class="restored-text">
+                    <p>Las tareas serán encargadas por anunciantes o capitanes de la comunidad, quienes pagarán en <span class="tapi-highlight">₮API</span> para que la tripulación las realice. Esto crea una demanda constante del token, asegurando estabilidad y crecimiento orgánico.</p>
+                </div>
+            </div>
+
+            <div class="card full-width">
+                <h3>⚖️ Un Galeón Económicamente Sostenible</h3>
+                <p>A diferencia de los barcos de papel que dependen de la especulación, <span class="tapi-highlight">₮API</span> se sostiene por sí solo:</p>
+                <div class="restored-text">
+                    <p>📌 <strong>El ciclo de la riqueza:</strong> Los anunciantes compran <span class="tapi-highlight">₮API</span> (ej. $100 USDT) para encargar una tarea a 10,000 grumetes. La tripulación gana gradualmente, pero para retirar deben acumular un mínimo. Así, no todos venden al mismo tiempo.</p>
+                    <p><strong>El resultado es matemática básica:</strong> La demanda crece naturalmente porque son <strong>COMPRAS GRANDES vs POCAS VENTAS Y AISLADAS</strong>.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Qué Aprenderás (Arsenal) -->
-    <section id="entrenamiento">
-        <h2 class="section-title">El Arsenal del Corsario</h2>
+    <!-- ======================================================= -->
+    <!-- 3. SECCIÓN: PUNTOS CLAVES Y DIFERENCIAS                 -->
+    <!-- ======================================================= -->
+    <section id="puntos-claves">
+        <h2 class="section-title">El Código de Honor Pirata</h2>
         <div class="grid-3d">
             <div class="card">
-                <h3>Bots de Trading 🤖</h3>
-                <p>Aprende a configurar y desplegar bots automatizados. Mientras tú duermes o navegas, tus bots estarán cazando oportunidades en el mercado y acumulando ganancias pasivas.</p>
+                <h3>📅 El Día del Desembarco</h3>
+                <p>🔹 No anunciaré con anticipación la fecha exacta del lanzamiento. Evitaremos la especulación y oportunistas.</p>
             </div>
             <div class="card">
-                <h3>Cero Riesgo en Futuros 🚫</h3>
-                <p>El cementerio está lleno de piratas que se apalancaron x100. Aquí aprenderás a operar en Spot, comprando el activo real, gestionando tu capital sin riesgo de liquidación.</p>
+                <h3>🛡️ Tesoro Asegurado</h3>
+                <p>🔹 Los cofres de liquidez estarán gestionados y bloqueados estrictamente, evitando cualquier motín o manipulación.</p>
             </div>
             <div class="card">
-                <h3>Estrategia Profesional 📈</h3>
-                <p>Lectura de velas japonesas reales, psicología del trading y gestión de riesgos. Te daré las herramientas de un profesional con mentalidad institucional y de corsario.</p>
+                <h3>💰 El Reparto del Botín</h3>
+                <p>🔹 La comunidad es prioridad: se repartirá hasta el 80% de la recompensa a quien realice el trabajo.</p>
             </div>
         </div>
-    </section>
-
-    <!-- Sección Política de Privacidad -->
-    <section id="privacidad">
-        <h2 class="section-title">Política de Privacidad</h2>
-        <div class="privacy-box">
-            <p><strong>Última actualización:</strong> Febrero 2026</p>
-            <p>En <strong>Corsario Cripto</strong> respetamos profundamente tu privacidad. Como buenos hackers y protectores de nuestro tesoro, valoramos la seguridad de tu información personal.</p>
-            
-            <h4>1. Información que recopilamos</h4>
-            <p>Al ser una plataforma educativa 100% gratuita, minimizamos la recolección de datos. Solo recopilamos tu correo electrónico si decides unirte a nuestra lista de distribución o al foro de la tripulación.</p>
-            
-            <h4>2. Uso de la información</h4>
-            <p>Tu información jamás será vendida a terceros, exchanges o entidades gubernamentales. Se utilizará exclusivamente para enviarte guías de trading, actualizaciones de bots y noticias del mercado cripto.</p>
-            
-            <h4>3. Cookies y Rastreo</h4>
-            <p>Utilizamos cookies esenciales para mejorar tu experiencia de navegación en la cubierta de nuestro sitio. No usamos rastreadores invasivos de publicidad corporativa.</p>
-            
-            <h4>4. Contacto</h4>
-            <p>Si deseas desaparecer de nuestros radares, puedes solicitar la eliminación completa de tus datos en cualquier momento respondiendo a nuestros correos con la palabra "ABANDONAR BARCO".</p>
-        </div>
-    </section>
-
-    <!-- Footer con Redes Sociales -->
-    <footer>
-        <h3 style="font-family: var(--font-hacker); color: var(--accent-gold); margin-bottom: 20px;">Únete a la Tripulación</h3>
         
+        <br><br>
+        <h2 class="section-title">Defensas del Barco</h2>
+        <div class="grid-3d">
+            <div class="card">
+                <h3>🛑 Límite Antibalas</h3>
+                <p>🔹 Límite de compra por transacción: Evita que los grandes capitanes compren todo de golpe.</p>
+            </div>
+            <div class="card">
+                <h3>⚔️ Cañones Anti-Bots</h3>
+                <p>🔹 Bloqueamos a los francotiradores robóticos que intentan drenar la liquidez.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 4. SECCIÓN: HOJA DE RUTA (ROADMAP ANIMADO)              -->
+    <!-- ======================================================= -->
+    <section id="mapa-navegacion">
+        <h2 class="section-title">El Mapa de Navegación (Roadmap)</h2>
+        <p class="hero-subtitle" style="text-align: center; margin: 0 auto 40px;">El rumbo trazado para conquistar los 7 mares del internet.</p>
+        
+        <div class="timeline">
+            <!-- Paso 1 (Completado) -->
+            <div class="timeline-item left done">
+                <div class="timeline-icon">✅</div>
+                <div class="timeline-content card">
+                    <h3>Paso 1: El Astillero</h3>
+                    <p>Creación de la Web Informativa para reclutar a la tripulación inicial.</p>
+                    <span class="status-badge completado">¡Completado!</span>
+                </div>
+            </div>
+
+            <!-- Paso 2 (Pendiente) -->
+            <div class="timeline-item right pending">
+                <div class="timeline-icon">⏳</div>
+                <div class="timeline-content card">
+                    <h3>Paso 2: La Taberna</h3>
+                    <p>Creación y programación de la Web de Tareas y Misiones.</p>
+                    <span class="status-badge pendiente">Pendiente</span>
+                </div>
+            </div>
+
+            <!-- Paso 3 (Pendiente) -->
+            <div class="timeline-item left pending">
+                <div class="timeline-icon">⚒️</div>
+                <div class="timeline-content card">
+                    <h3>Paso 3: La Forja del Oro</h3>
+                    <p>Creación del Smart Contract y el Token <span class="tapi-highlight">₮API</span> en la Blockchain.</p>
+                    <span class="status-badge pendiente">Pendiente</span>
+                </div>
+            </div>
+
+            <!-- Paso 4 (Pendiente) -->
+            <div class="timeline-item right pending">
+                <div class="timeline-icon">🚀</div>
+                <div class="timeline-content card">
+                    <h3>Paso 4: Zarpar a la Mar</h3>
+                    <p>Lanzamiento Oficial de la Plataforma de Tareas al público.</p>
+                    <span class="status-badge pendiente">Pendiente</span>
+                </div>
+            </div>
+
+            <!-- Paso 5 (Pendiente) -->
+            <div class="timeline-item left pending">
+                <div class="timeline-icon">🏴‍☠️</div>
+                <div class="timeline-content card">
+                    <h3>Paso 5: El Gran Saqueo</h3>
+                    <p>Encargar las primeras Misiones y empezar a repartir recompensas a la tripulación.</p>
+                    <span class="status-badge pendiente">Pendiente</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 5. NUEVA SECCIÓN: LA TRIPULACIÓN (EQUIPO / PIRÁMIDE)    -->
+    <!-- ======================================================= -->
+    <section id="tripulacion">
+        <h2 class="section-title">Los Oficiales del Galeón</h2>
+        <p class="hero-subtitle" style="text-align: center; margin: 0 auto 40px;">El equipo detrás del timón de <span class="tapi-highlight">₮API</span>. Total transparencia, sin máscaras.</p>
+        
+        <div class="pyramid-container">
+            
+            <!-- NIVEL 1: EL CAPITÁN (TÚ) -->
+            <div class="pyramid-level level-1">
+                <div class="crew-card">
+                    <div class="crew-img-container">
+                        <!-- Coloca tu foto 9x16 aquí -->
+                        <img src="IMG/capitan.webp" alt="Michel Díaz - Capitán" onerror="this.src='https://via.placeholder.com/270x480/000000/FFD700?text=FOTO+9x16'">
+                    </div>
+                    <div class="crew-info">
+                        <h4 class="crew-role">Capitán (Fundador)</h4>
+                        <h3 class="crew-name">Michel Díaz Jomarrón</h3>
+                        <p class="crew-alias">Alias: <span>Corsario Cripto</span></p>
+                        <p class="crew-flag">🇨🇺 Cuba</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NIVEL 2: LOS OFICIALES TÉCNICOS -->
+            <div class="pyramid-level level-2">
+                <!-- Primer Oficial -->
+                <div class="crew-card">
+                    <div class="crew-img-container">
+                        <img src="IMG/oficial1.webp" alt="Mateo Silva - Desarrollador" onerror="this.src='https://via.placeholder.com/270x480/000000/FFD700?text=FOTO+9x16'">
+                    </div>
+                    <div class="crew-info">
+                        <h4 class="crew-role">Primer Oficial (Dev Jefe)</h4>
+                        <h3 class="crew-name">Mateo Silva</h3>
+                        <p class="crew-alias">Alias: <span>Rompecódigos</span></p>
+                        <p class="crew-flag">🇧🇷 Brasil</p>
+                    </div>
+                </div>
+                <!-- Segundo Oficial -->
+                <div class="crew-card">
+                    <div class="crew-img-container">
+                        <img src="IMG/oficial2.webp" alt="Elena Rostova - Ciberseguridad" onerror="this.src='https://via.placeholder.com/270x480/000000/FFD700?text=FOTO+9x16'">
+                    </div>
+                    <div class="crew-info">
+                        <h4 class="crew-role">Segundo Oficial (Seguridad)</h4>
+                        <h3 class="crew-name">Elena Rostova</h3>
+                        <p class="crew-alias">Alias: <span>Escudo de Hierro</span></p>
+                        <p class="crew-flag">🇷🇺 Rusia</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NIVEL 3: COMUNIDAD Y MARKETING -->
+            <div class="pyramid-level level-3">
+                <!-- Contramaestre Inglés -->
+                <div class="crew-card">
+                    <div class="crew-img-container">
+                        <img src="IMG/tripulante1.webp" alt="James Thorne - Admin EN" onerror="this.src='https://via.placeholder.com/270x480/000000/FFD700?text=FOTO+9x16'">
+                    </div>
+                    <div class="crew-info">
+                        <h4 class="crew-role">Contramaestre (Admin EN)</h4>
+                        <h3 class="crew-name">James Thorne</h3>
+                        <p class="crew-alias">Alias: <span>El Heraldo</span></p>
+                        <p class="crew-flag">🇬🇧 Reino Unido</p>
+                    </div>
+                </div>
+                <!-- Navegante (Marketing) AL CENTRO -->
+                <div class="crew-card">
+                    <div class="crew-img-container">
+                        <img src="IMG/tripulante2.webp" alt="Sofía Mendoza - Marketing" onerror="this.src='https://via.placeholder.com/270x480/000000/FFD700?text=FOTO+9x16'">
+                    </div>
+                    <div class="crew-info">
+                        <h4 class="crew-role">Navegante (Jefa Marketing)</h4>
+                        <h3 class="crew-name">Sofía Mendoza</h3>
+                        <p class="crew-alias">Alias: <span>Canto de Sirena</span></p>
+                        <p class="crew-flag">🇨🇴 Colombia</p>
+                    </div>
+                </div>
+                <!-- Artillero Español -->
+                <div class="crew-card">
+                    <div class="crew-img-container">
+                        <img src="IMG/tripulante3.webp" alt="Carlos Herrera - Admin ES" onerror="this.src='https://via.placeholder.com/270x480/000000/FFD700?text=FOTO+9x16'">
+                    </div>
+                    <div class="crew-info">
+                        <h4 class="crew-role">Artillero (Admin ES)</h4>
+                        <h3 class="crew-name">Carlos Herrera</h3>
+                        <p class="crew-alias">Alias: <span>Ojo de Halcón</span></p>
+                        <p class="crew-flag">🇲🇽 México</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 6. SECCIÓN: PLANES FUTUROS Y NFTS                       -->
+    <!-- ======================================================= -->
+    <section id="futuro">
+        <h2 class="section-title">Nuevos Horizontes y Tesoros</h2>
+        <div class="grid-3d">
+            <div class="card">
+                <h3>🔥 Bodega de Staking</h3>
+                <p>🔹 Congela tu botín. Los usuarios podrán hacer staking con sus tokens para generar rendimientos pasivos mientras navegan.</p>
+            </div>
+            <div class="card">
+                <h3>🔥 Quema de Barcos</h3>
+                <p>🔹 Parte de las ganancias de la plataforma se usará para recomprar y quemar tokens, reduciendo la oferta.</p>
+            </div>
+            <div class="card">
+                <h3>🦜 NFTs Exclusivos</h3>
+                <p>🔹 Avatares piratas con beneficios. Quienes usen nuestros NFTs como foto de perfil recibirán multiplicadores de botín.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 7. SECCIÓN: CONTRATO INTELIGENTE Y COPIAR               -->
+    <!-- ======================================================= -->
+    <section id="contrato" class="contract">
+        <h2 class="section-title">El Mapa del Tesoro (Contrato)</h2>
+        <div class="contract-details">
+          <div class="contract-info">
+            <div class="info-row">
+              <span class="label">Nombre del Galeón:</span>
+              <span class="value"><span class="tapi-highlight">₮API</span></span>
+            </div>
+            <div class="info-row">
+              <span class="label">Símbolo:</span>
+              <span class="value"><span class="tapi-highlight">₮API</span></span>
+            </div>
+            <div class="info-row">
+              <span class="label">Suministro Máximo:</span>
+              <span class="value">10,000,000,000 <span class="tapi-highlight">₮API</span></span>
+            </div>
+            <div class="info-row">
+              <span class="label">Océano (Red):</span>
+              <span class="value">TON Network</span>
+            </div>
+          </div>
+          <div class="contract-address-container">
+            <button class="copy-button" id="copyContract">
+              <span class="contract-text">EQAekpwR3w2zlK9NnsVJs2kfbzeeeJUMv9Jt9hG0eOBeKW6h</span>
+              <i>📋 Copiar Contrato</i>
+            </button>
+          </div>
+        </div>
+        <div class="copy-notification" id="copyNotification">
+          <span>¡Coordenadas Copiadas con Éxito, Capitán!</span>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 8. SECCIÓN: GRÁFICA DE DISTRIBUCIÓN (CORREGIDA)         -->
+    <!-- ======================================================= -->
+    <section class="token-distribution" id="distribucion">
+        <h2 class="section-title">Distribución del Tesoro</h2>
+        <div class="distribution-container">
+          
+          <!-- CONTENEDOR DEL COFRE CORREGIDO PARA CENTRADO PERFECTO -->
+          <div class="chart-container">
+            <canvas id="distributionChart" style="height: 350px; width: 100%; max-width: 400px; background-image: url('IMG/cofre1.webp'); background-size: contain; background-repeat: no-repeat; background-position: center; filter: drop-shadow(0 0 20px #FFD700); margin: 0 auto; display: block;"></canvas>
+          </div>
+
+          <div class="distribution-details">
+            <div class="distribution-item">
+              <div class="color-indicator" style="background: #FFD700;"></div>
+              <span class="item-label">Fondo de Liquidez</span>
+              <span class="percentage">50%</span>
+            </div>
+            <div class="distribution-item">
+              <div class="color-indicator" style="background: #2ecc71;"></div>
+              <span class="item-label">Arcas de Reserva</span>
+              <span class="percentage">20%</span>
+            </div>
+            <div class="distribution-item">
+              <div class="color-indicator" style="background: #e4ab1d;"></div>
+              <span class="item-label">Recompensas para la Tripulación</span>
+              <span class="percentage">15%</span>
+            </div>
+            <div class="distribution-item">
+              <div class="color-indicator" style="background: #e74c3c;"></div>
+              <span class="item-label">Mantenimiento y Oficiales</span>
+              <span class="percentage">10%</span>
+            </div>
+            <div class="distribution-item">
+              <div class="color-indicator" style="background: #9b59b6;"></div>
+              <span class="item-label">Llamado a las Armas (Marketing)</span>
+              <span class="percentage">5%</span>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 9. PIE DE PÁGINA Y REDES SOCIALES                       -->
+    <!-- ======================================================= -->
+    <footer>
+        <h3 style="font-family: var(--font-hacker); color: var(--accent-gold); margin-bottom: 20px; font-size: 2rem;">¡Únete a la Tripulación!</h3>
         <div class="social-links">
-            <!-- X (Twitter) -->
-            <a href="https://x.com/Corsario_Cripto" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                <svg viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
+            <a href="https://x.com/Corsario_Cripto" target="_blank" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/@Corsario_Cripto" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <svg viewBox="0 0 24 24">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
+            <a href="https://www.youtube.com/@Corsario_Cripto" target="_blank" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
         </div>
-
-        <p>&copy; 2026 Corsario Cripto. Todos los derechos reservados. No somos asesores financieros, somos piratas de la libertad financiera.</p>
+        <p>&copy; 2026 Corsario Cripto. Todos los derechos reservados bajo la bandera negra.</p>
     </footer>
 
-    <!-- Enlace al archivo JavaScript externo -->
+    <!-- Vinculación del Script -->
     <script src="script.js"></script>
 </body>
 </html>
