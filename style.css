@@ -1,12 +1,12 @@
 /* ======================================================= */
-/* 1. VARIABLES GLOBALES Y COLORES PRINCIPALES             */
+/* 1. VARIABLES GLOBALES Y RESET                           */
 /* ======================================================= */
 :root {
-    --bg-dark: #060a0f; /* Azul profundo del océano nocturno */
-    --accent-gold: #FFD700; /* Oro pirata puro */
+    --bg-dark: #060a0f; 
+    --accent-gold: #FFD700; 
     --accent-gold-dark: #b8860b;
-    --accent-red: #D90429; /* Rojo corsario */
-    --accent-teal: #00F5D4; /* Color agua marina */
+    --accent-red: #D90429; 
+    --accent-teal: #00F5D4; 
     --text-main: #e0e6ed;
     --card-bg: rgba(10, 16, 25, 0.8);
     --font-hacker: 'Orbitron', sans-serif;
@@ -20,16 +20,21 @@
     scroll-behavior: smooth;
 }
 
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* Evita cualquier desplazamiento horizontal */
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: var(--font-text);
-    overflow-x: hidden;
     background: radial-gradient(circle at top right, #000000, var(--bg-dark) 70%, #000000);
 }
 
 /* ======================================================= */
-/* 2. CLASES PARA RESALTAR TEXTOS                          */
+/* 2. TIPOGRAFÍA Y TEXTOS RESALTADOS                       */
 /* ======================================================= */
 .tapi-highlight {
     color: var(--accent-gold);
@@ -50,6 +55,15 @@ body {
     color: #cbd5e1;
 }
 
+.section-title {
+    font-family: var(--font-hacker);
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #fff;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
 /* ======================================================= */
 /* 3. EFECTOS DE FONDO (CANVAS Y MONEDAS)                  */
 /* ======================================================= */
@@ -57,7 +71,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     z-index: -2;
     opacity: 0.15; 
@@ -68,7 +82,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     pointer-events: none;
     z-index: -1;
@@ -77,7 +91,7 @@ body {
 
 .particle {
     position: absolute;
-    background-image: url('IMG/logo.webp'); /* Usa tu nueva moneda de oro */
+    background-image: url('IMG/logo.webp'); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -96,7 +110,7 @@ body {
 }
 
 /* ======================================================= */
-/* 4. BARRA DE NAVEGACIÓN (MENÚ ARRIBA)                    */
+/* 4. MENÚ DE NAVEGACIÓN Y HAMBURGUESA                     */
 /* ======================================================= */
 nav {
     position: fixed;
@@ -147,8 +161,24 @@ nav ul li a:hover {
     text-shadow: 0 0 10px var(--accent-gold);
 }
 
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 101;
+}
+
+.menu-toggle .bar {
+    width: 30px;
+    height: 3px;
+    background-color: var(--accent-gold);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
 /* ======================================================= */
-/* 5. INICIO (HEADER / HERO SECTION)                       */
+/* 5. SECCIÓN INICIO (HERO)                                */
 /* ======================================================= */
 header {
     min-height: 100vh;
@@ -223,15 +253,7 @@ h1 {
 section {
     padding: 80px 8%;
     position: relative;
-}
-
-.section-title {
-    font-family: var(--font-hacker);
-    font-size: 2.8rem;
-    text-align: center;
-    margin-bottom: 40px;
-    color: #fff;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
 }
 
 .grid-3d {
@@ -239,6 +261,7 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     perspective: 1000px;
+    width: 100%;
 }
 
 .card {
@@ -277,7 +300,7 @@ section {
 }
 
 /* ======================================================= */
-/* 7. NUEVO: CSS DEL MAPA DE NAVEGACIÓN (ROADMAP)          */
+/* 7. HOJA DE RUTA (ROADMAP)                               */
 /* ======================================================= */
 .timeline {
     position: relative;
@@ -285,7 +308,6 @@ section {
     margin: 0 auto;
 }
 
-/* La línea vertical del centro */
 .timeline::after {
     content: '';
     position: absolute;
@@ -303,10 +325,9 @@ section {
     position: relative;
     background-color: inherit;
     width: 50%;
-    opacity: 0; /* Para la animación de scroll */
+    opacity: 0; 
 }
 
-/* Bolitas / Iconos del centro */
 .timeline-icon {
     position: absolute;
     width: 50px;
@@ -326,12 +347,8 @@ section {
 
 .left { left: 0; }
 .right { left: 50%; }
+.right .timeline-icon { left: -25px; }
 
-.right .timeline-icon {
-    left: -25px;
-}
-
-/* Badges de Estado (Completado / Pendiente) */
 .status-badge {
     display: inline-block;
     padding: 8px 15px;
@@ -356,118 +373,19 @@ section {
     border: 1px solid #555;
 }
 
-/* Estilo especial para el paso completado */
 .timeline-item.done .card {
     border-color: var(--accent-gold);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 /* ======================================================= */
-/* 8. SECCIÓN DE CONTRATO Y GRÁFICAS                       */
-/* ======================================================= */
-.contract { text-align: center; padding: 6rem 2rem; }
-.contract-details {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 2.5rem;
-    max-width: 850px;
-    margin: 0 auto;
-    border: 2px solid var(--accent-gold-dark);
-    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
-}
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
-    border-bottom: 1px dashed rgba(255, 215, 0, 0.3);
-    font-size: 1.2rem;
-}
-.copy-button {
-    width: 100%;
-    margin-top: 25px;
-    padding: 1.2rem;
-    background: rgba(255, 215, 0, 0.1);
-    border: 1px solid var(--accent-gold);
-    border-radius: 8px;
-    color: var(--accent-gold);
-    font-family: var(--font-hacker);
-    font-size: 1.1rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-.copy-button:hover { background: var(--accent-gold); color: #000; }
-.copy-notification { display: none; color: var(--accent-teal); margin-top: 15px; font-weight: bold; }
-
-.distribution-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.distribution-item {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1.2rem 1.8rem;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 15px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    font-size: 1.1rem;
-}
-
-/* ======================================================= */
-/* 9. PIE DE PÁGINA Y REDES SOCIALES                       */
-/* ======================================================= */
-footer {
-    text-align: center;
-    padding: 60px 20px 40px;
-    background: #020407;
-    border-top: 2px solid var(--accent-gold-dark);
-}
-.social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
-.social-links a {
-    display: flex; justify-content: center; align-items: center;
-    width: 65px; height: 65px; background: var(--card-bg);
-    border: 2px solid var(--accent-gold); border-radius: 50%; color: var(--accent-gold);
-}
-.social-links a svg { width: 30px; height: 30px; fill: currentColor; }
-
-/* ======================================================= */
-/* 10. DISEÑO PARA TELÉFONOS (RESPONSIVE MÓVIL)            */
-/* ======================================================= */
-@media (max-width: 900px) {
-    h1 { font-size: 2.2rem; }
-    nav { padding: 15px; flex-direction: column; gap: 10px; }
-    nav ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; }
-    header { padding: 180px 20px 40px; }
-    .hero-img { width: 200px; height: 200px; }
-    
-    /* Arreglo del Roadmap para Móviles */
-    .timeline::after { left: 31px; }
-    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-    .left, .right { left: 0; }
-    .timeline-icon, .right .timeline-icon { left: 5px; top: 30px; }
-    
-    .grid-3d { grid-template-columns: 1fr; }
-    .info-row { flex-direction: column; text-align: left; gap: 5px; }
-}
-
-
-/* ======================================================= */
-/* ESTILOS PARA LA TRIPULACIÓN (PIRÁMIDE DE CARTAS)        */
+/* 8. LA TRIPULACIÓN (PIRÁMIDE DE CARTAS)                  */
 /* ======================================================= */
 .pyramid-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px; /* Un poco más de separación entre niveles */
+    gap: 30px;
     width: 100%;
     margin-top: 30px;
 }
@@ -480,7 +398,6 @@ footer {
     width: 100%;
 }
 
-/* Tarjeta Base del Tripulante */
 .crew-card {
     background: var(--card-bg);
     border: 2px solid rgba(255, 215, 0, 0.4);
@@ -499,10 +416,9 @@ footer {
     border-color: var(--accent-gold);
 }
 
-/* Contenedor de la Imagen (CORREGIDO: Ahora es más ancho y menos alto) */
 .crew-img-container {
     width: 100%;
-    aspect-ratio: 4 / 5; /* Cambiamos de 9/16 a 4/5 para un retrato perfecto */
+    aspect-ratio: 4 / 5; 
     background-color: #111;
     position: relative;
     border-bottom: 2px solid rgba(255, 215, 0, 0.3);
@@ -512,10 +428,9 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center; /* Asegura que no se corte la cabeza */
+    object-position: top center; 
 }
 
-/* Textos dentro de la tarjeta */
 .crew-info {
     padding: 20px 15px;
     flex-grow: 1;
@@ -534,7 +449,7 @@ footer {
 
 .crew-name {
     color: #fff;
-    font-size: 1.6rem; /* Letra un poquito más grande */
+    font-size: 1.6rem; 
     margin-bottom: 8px;
     line-height: 1.2;
 }
@@ -557,21 +472,192 @@ footer {
     color: #aaa;
 }
 
-/* TAMAÑOS EN PIRÁMIDE (CORREGIDO: Tarjetas mucho más anchas) */
-.level-1 .crew-card { width: 360px; } /* Antes 300px */
-.level-2 .crew-card { width: 330px; } /* Antes 270px */
-.level-3 .crew-card { width: 300px; } /* Antes 240px */
-
+.level-1 .crew-card { width: 360px; } 
+.level-2 .crew-card { width: 330px; } 
+.level-3 .crew-card { width: 300px; } 
 
 /* ======================================================= */
-/* RESPONSIVO DE LA TRIPULACIÓN (PARA MÓVILES)             */
+/* 9. SECCIÓN DE CONTRATO Y DISTRIBUCIÓN                   */
+/* ======================================================= */
+.contract { text-align: center; padding: 6rem 2rem; }
+.contract-details {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2.5rem;
+    max-width: 850px;
+    margin: 0 auto;
+    border: 2px solid var(--accent-gold-dark);
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(255, 215, 0, 0.3);
+    font-size: 1.2rem;
+}
+
+.copy-button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 1.2rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--accent-gold);
+    border-radius: 8px;
+    color: var(--accent-gold);
+    font-family: var(--font-hacker);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    gap: 15px; 
+}
+
+.copy-button:hover {
+    background: var(--accent-gold);
+    color: #000;
+}
+
+.contract-text {
+    word-break: break-all; 
+    overflow-wrap: break-word;
+    text-align: left;
+    flex: 1; 
+}
+
+.copy-notification { display: none; color: var(--accent-teal); margin-top: 15px; font-weight: bold; text-align: center; }
+
+.distribution-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.distribution-item {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.2rem 1.8rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    font-size: 1.1rem;
+}
+
+/* ======================================================= */
+/* 10. PIE DE PÁGINA (FOOTER)                              */
+/* ======================================================= */
+footer {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #020407;
+    border-top: 2px solid var(--accent-gold-dark);
+}
+
+.social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
+.social-links a {
+    display: flex; justify-content: center; align-items: center;
+    width: 65px; height: 65px; background: var(--card-bg);
+    border: 2px solid var(--accent-gold); border-radius: 50%; color: var(--accent-gold);
+    transition: all 0.3s ease;
+}
+.social-links a:hover {
+    background: var(--accent-gold);
+    color: #000;
+    transform: scale(1.1);
+}
+.social-links a svg { width: 30px; height: 30px; fill: currentColor; }
+
+/* ======================================================= */
+/* 11. DISEÑO RESPONSIVO MÓVIL (TODO EN UN SOLO LUGAR)     */
 /* ======================================================= */
 @media (max-width: 900px) {
-    /* En celulares, usamos el ancho disponible para que no se aprieten */
+    
+    /* Textos y Espacios generales */
+    h1 { font-size: 2.2rem; }
+    section { padding: 60px 5%; }
+    
+    /* Menú y Navegación */
+    nav { 
+        padding: 15px 20px; 
+        flex-direction: row; 
+        justify-content: space-between;
+    }
+    .menu-toggle { display: flex; }
+    
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(6, 10, 15, 0.95);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 20px;
+        border-bottom: 2px solid var(--accent-gold);
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s ease;
+        z-index: 99;
+    }
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    /* Animación X del menú */
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    /* Cabecera */
+    header { padding: 140px 20px 40px; }
+    .hero-img { width: 200px; height: 200px; }
+    
+    /* Roadmap */
+    .timeline::after { left: 31px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+    .left, .right { left: 0; }
+    .timeline-icon, .right .timeline-icon { left: 5px; top: 30px; }
+    
+    /* Grid y Tarjetas */
+    .grid-3d { grid-template-columns: 1fr; }
+    
+    /* La Tripulación */
     .level-1 .crew-card, 
     .level-2 .crew-card, 
     .level-3 .crew-card { 
         width: 100%; 
         max-width: 350px; 
+    }
+    
+    /* Contrato */
+    .contract-details { padding: 1.5rem; }
+    .info-row { flex-direction: column; text-align: left; gap: 5px; }
+    
+    .copy-button { 
+        font-size: 0.85rem; 
+        padding: 1rem; 
+        flex-direction: column; 
+        gap: 15px;
+        text-align: center;
+    }
+    .contract-text {
+        text-align: center;
+        font-size: 0.85rem; 
     }
 }
