@@ -23,21 +23,29 @@
     <canvas id="chartCanvas"></canvas>
     <div id="particles"></div>
 
-    <!-- ======================================================= -->
-    <!-- MENÚ DE NAVEGACIÓN SUPERIOR                             -->
+  <!-- ======================================================= -->
+    <!-- MENÚ DE NAVEGACIÓN SUPERIOR Y HAMBURGUESA               -->
     <!-- ======================================================= -->
     <nav>
         <div class="logo-text">
             <img src="IMG/logo.webp" alt="Moneda TAPI">
             <span class="tapi-highlight">₮API</span>
         </div>
-        <ul>
-            <li><a href="#inicio">Zarpar</a></li>
-            <li><a href="#sobre-tapi">El Botín</a></li>
-            <li><a href="#mapa-navegacion">El Mapa</a></li>
-            <li><a href="#tripulacion">Oficiales</a></li> <!-- NUEVO ENLACE AL EQUIPO -->
-            <li><a href="#futuro">Horizontes</a></li>
-            <li><a href="#contrato">Contrato</a></li>
+        
+        <!-- Botón del Menú Móvil (Las 3 rayitas) -->
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#inicio" class="nav-link">Zarpar</a></li>
+            <li><a href="#sobre-tapi" class="nav-link">El Botín</a></li>
+            <li><a href="#mapa-navegacion" class="nav-link">El Mapa</a></li>
+            <li><a href="#tripulacion" class="nav-link">Oficiales</a></li>
+            <li><a href="#futuro" class="nav-link">Horizontes</a></li>
+            <li><a href="#contrato" class="nav-link">Contrato</a></li>
         </ul>
     </nav>
 
