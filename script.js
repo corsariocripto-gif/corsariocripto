@@ -162,3 +162,26 @@ if(btnCopy) {
         });
     });
 }
+
+// ===================================================================
+// 5. FUNCIONALIDAD DEL MENÚ HAMBURGUESA (MÓVILES)
+// ===================================================================
+const mobileMenu = document.getElementById('mobile-menu');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+if(mobileMenu) {
+    // Abrir/Cerrar el menú al tocar el icono
+    mobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active'); // Transforma el icono en 'X'
+        navMenu.classList.toggle('active');       // Despliega el menú
+    });
+}
+
+// Cerrar el menú automáticamente al tocar cualquier enlace
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-active');
+        navMenu.classList.remove('active');
+    });
+});
